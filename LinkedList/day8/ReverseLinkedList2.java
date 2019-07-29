@@ -1,4 +1,4 @@
-package main.java.ChinaHadoop_AI_Offer.LinkedList.day1;
+package main.java.ChinaHadoop_AI_Offer.LinkedList.day8;
 
 /**
  * https://leetcode.com/problems/reverse-linked-list-ii/

@@ -1,4 +1,4 @@
-package main.java.ChinaHadoop_AI_Offer.LinkedList.day1;
+package main.java.ChinaHadoop_AI_Offer.LinkedList.day8;
 
 import java.util.HashMap;
 import java.util.HashSet;

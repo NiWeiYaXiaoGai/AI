@@ -1,9 +1,14 @@
-package main.java.ChinaHadoop_AI_Offer.LinkedList.day1;
+package main.java.ChinaHadoop_AI_Offer.LinkedList.day9;
 
 /**
  *https://leetcode.com/problems/sort-list/
  */
 public class SortList {
+    /**
+     * 链表归并排序
+     * 时间复杂度O(nlog(n))
+     * 空间复杂度O(1)
+     */
     public class ListNode {
         int val;
         ListNode next;
