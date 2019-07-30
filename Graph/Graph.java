@@ -4,20 +4,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * 有关内部类的泛型使用https://blog.csdn.net/chenkangqiang/article/details/56668118
+ * @param <E>
+ */
+
+/**
+ * 连通图：在无向图中，若任意两个顶点vivi与vjvj都有路径相通，则称该无向图为连通图。
+ * 连通网：在连通图中，若图的边具有一定的意义，每一条边都对应着一个数，称为权；权代表着连接连个顶点的代价，称这种连通图叫做连通网。
+ *生成树：一个连通图的生成树是指一个连通子图，它含有图中全部n个顶点，但只有足以构成一棵树的n-1条边。
+         一颗有n个顶点的生成树有且仅有n-1条边，如果生成树中再添加一条边，则必定成环。
+ *最小生成树：在连通网的所有生成树中，所有边的代价和最小的生成树，称为最小生成树。
+ * 图的深度优先搜索即前序遍历
+ * 图的宽度优先搜索即层序遍历
+ */
 public class Graph<E> {
     int capacity; //最多容纳顶点数
     int size; //图中顶点个数
-    E[] nodes; //节点数组
+    Node<E>[] nodes; //节点数组
     boolean[] isVisited;
     int[][] matrix; //邻接矩阵
 
+    private class Node<E>{
+        E val;
+        boolean isVisited;
+        public Node(E val) {
+            this.val = val;
+        }
+    }
 
     public Graph(int capacity) {
         this.capacity = capacity;
         size=0;
-        nodes=(E[]) new Object[capacity];
-        isVisited=new boolean[capacity];
+        nodes=new Node[capacity];
         matrix=new int[capacity][capacity];
+
     }
 
     public void add(E e){
@@ -25,14 +46,14 @@ public class Graph<E> {
             throw new IllegalArgumentException("element is null!!!!!!!!");
         if(size>=capacity)
             throw new IllegalArgumentException("Has exceeded graph capacity!!!!!!");
-        nodes[size]=e;
+        nodes[size]=new Node<>(e);
         size++;
     }
 
     //将图中所有节点的遍历状态设置成未遍历
     private void resetGraph(){
         for(int i=0;i<size;i++){
-            isVisited[i]=false;
+            nodes[i].isVisited=false;
         }
     }
 
@@ -68,11 +89,11 @@ public class Graph<E> {
         depthFirstTraverseImpl(index);
     }
     private void depthFirstTraverseImpl(int index){
-        System.out.println(nodes[index]);
-        isVisited[index]=true;
+        System.out.println(nodes[index].val);
+        nodes[index].isVisited=true;
         for(int i=0;i<size;i++){
             if(matrix[index][i]!=0){
-                if(isVisited[i]==false){
+                if(nodes[i].isVisited==false){
                     depthFirstTraverseImpl(i);
                 }else{
                     continue;
@@ -89,7 +110,7 @@ public class Graph<E> {
      */
     public void breadthFirstTraverse(int index){
         resetGraph();
-        isVisited[index]=true;
+        nodes[index].isVisited=true;
         List<Integer> cur=new ArrayList<>();
         cur.add(index);
         breadthFirstTraverseImpl(cur);
@@ -102,14 +123,13 @@ public class Graph<E> {
     private void breadthFirstTraverseImpl(List<Integer> pre){
         List<Integer> cur=new ArrayList<>();
         for(int i=0;i<pre.size();i++){ //遍历上一层的节点
-            System.out.println(nodes[pre.get(i)]);
+            System.out.println(nodes[pre.get(i)].val);
             for(int j=0;j<size;j++){   //遍历上一层节点子节点
                 if(matrix[pre.get(i)][j]!=0){
-                    if(!isVisited[j]) {  //如果当前节点没有被遍历
+                    if(!nodes[j].isVisited) {  //如果当前节点没有被遍历
+                        nodes[j].isVisited=true;
                         cur.add(j);
-                        isVisited[j]=true;
-                    }
-                    else
+                    } else
                         continue;
                 }else{
                     continue;
@@ -124,6 +144,7 @@ public class Graph<E> {
 
     /**
      * 生成图的最小生成树
+     * 普利姆算法
      * @return
      */
     private class Edge{
