@@ -44,19 +44,56 @@ public class Sort {
         }
     }
 
-        public static void print ( int[] arr){
-            StringBuilder str = new StringBuilder();
-            for (int i = 0; i < arr.length; i++) {
-                str.append(arr[i]).append(" ");
-            }
-            System.out.println(str.toString());
-        }
+    //快速排序算法
+    public void quickSort(int[] arr){
+        if(arr==null || arr.length==0)
+            return;
+        quickImpl(arr,0,arr.length-1);
+    }
 
-        public static void main (String[]args){
-            Sort sort = new Sort();
-            int[] arr = {5, 2, 4, 6, 1, 3, 2, 6};
-            sort.mergeSort(arr);
-            print(arr);
+    private void quickImpl(int[] arr,int low,int high){
+        if(low>=high)
+            return;
+        int temp;
+        int left=low;
+        int right=high;
+        while(left<right){
+            while(left<right && arr[right]>arr[low]){
+                right--;
+            }
+            while(left<right && arr[left]<=arr[low]){
+                left++;
+            }
+            if(left<right){
+                temp=arr[left];
+                arr[left]=arr[right];
+                arr[right]=temp;
+            }
         }
+        temp=arr[low];
+        arr[low]=arr[left];
+        arr[left]=temp;
+        quickImpl(arr,low,left-1);
+        quickImpl(arr,left+1,high);
+    }
+
+
+    public static void print ( int[] arr){
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < arr.length; i++) {
+            str.append(arr[i]).append(" ");
+        }
+        System.out.println(str.toString());
+    }
+
+    public static void main (String[]args){
+        Sort sort = new Sort();
+        int[] arr = {5, 2, 4, 6, 1, 3, 2, 6};
+        int[] arr2={6,2,3,1,4};
+        int[] arr3={3,7,8,5,6};
+//        sort.mergeSort(arr);
+        sort.quickSort(arr3);
+        print(arr3);
+    }
 
 }
