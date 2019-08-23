@@ -1,4 +1,4 @@
-package main.java.ChinaHadoop_AI_Offer.Array.day1;
+package main.java.ChinaHadoop_AI_Offer.Array.day3;
 
 import java.util.*;
 

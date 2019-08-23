@@ -1,4 +1,4 @@
-package main.java.ChinaHadoop_AI_Offer.Array.day3;
+package main.java.ChinaHadoop_AI_Offer.Array.day5;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

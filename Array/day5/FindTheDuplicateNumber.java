@@ -1,4 +1,4 @@
-package main.java.ChinaHadoop_AI_Offer.Array.day3;
+package main.java.ChinaHadoop_AI_Offer.Array.day5;
 
 /**
  * https://leetcode.com/problems/find-the-duplicate-number/

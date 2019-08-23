@@ -24,13 +24,13 @@ public class ReverseWordsInAString {
     }
 
     public static void main(String[] args) {
-        ReverseWordsInAString reverseWordsInAString=new ReverseWordsInAString();
-        reverseWordsInAString.reverseWords("");
         String str="  the sky is blue";
         String [] arr = str.split(" ");
         for(String ss : arr){
             System.out.println(ss);
         }
+        ReverseWordsInAString reverseWordsInAString=new ReverseWordsInAString();
+        System.out.println(reverseWordsInAString.reverseWords(str));
     }
 }
 
